@@ -5,6 +5,8 @@
  */
 package tecemergency;
 
+import static tecemergency.Colores.*;
+
 /**
  *
  * @author Melina
@@ -16,7 +18,8 @@ public class TECEmergency {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-    Paciente paciente1 = new Paciente("Rodrigo","05-10-96","Tiene dolor",'D','A');
-    Paciente paciente2 = new Paciente("Monica","5","Embarazo",'P','R');
+    Paciente paciente1 = new Paciente("Rodrigo","05-10-96","Tiene dolor",AMARILLO);
+    Paciente paciente2 = new Paciente("Monica","5","Embarazo", ROJO);
+    new Registro().setVisible(true);
     }
 }

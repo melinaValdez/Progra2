@@ -9,16 +9,16 @@ package tecemergency;
  *
  * @author Melina
  */
-public enum Colores{
-    ROJO(0,'R',"ROJO"), VERDE(1,'V',"VERDE"), AMARILLO(2,'A',"AMARILLO");
+public enum Enfermedades {
+    INFARTO(0,'I',"INFARTO"), HERIDA(1,'H',"HERIDA"), PARTO(2,'P',"PARTO"), DOLOR(3,'D',"DOLOR"), QUEBRADURA(4,'Q',"QUEBRADURA"), OTRO(5,'O',"OTRO");
     private final int prioridad;
     private final char codigo;
-    private final String color;
+    private final String enfermedad;
     
-    Colores(int pPrioridad, char pInicial, String pColor){
+    Enfermedades(int pPrioridad, char pCodigo, String pEnfermedad){
         prioridad = pPrioridad;
-        codigo = pInicial;
-        color = pColor;
+        codigo = pCodigo;
+        enfermedad = pEnfermedad;
     }
 
     public int getPrioridad() {
@@ -29,8 +29,8 @@ public enum Colores{
         return codigo;
     }
 
-    public String getColor() {
-        return color;
+    public String getEnfermedad() {
+        return enfermedad;
     }
     
 }
