@@ -9,31 +9,154 @@ package tecemergency;
  *
  * @author Melina
  */
-public class LQueue<T> {
+public class LQueue {
 
-    private Node<T> front;
-    private Node<T> rear;
+    private Node front;
+    private Node rear;
     private int size;
 
     public LQueue(){
-        this.front = new Node<>();
+        this.front = new Node();
         this.rear = this.front;
         this.size = 0;
     }
 
-    public void enqueue(T element){
-        this.rear.setNext(new Node<T>(element, null));
-        this.rear = rear.getNext();
-        this.size++;
+    /*Encola paciente segun el padecimiento que tenga.
+    Orden de prioridad:
+        [I]=Infarto
+        [H]=Perdida de sangre por herida
+        [P]=Parto
+        [D]=Dolor
+        [Q]Quebradura
+        [O]=Otro
+    */
+    public void enqueue(Paciente paciente){
+        Node nuevo=new Node(paciente);
+        if(this.size==0){
+            this.rear.setNext(nuevo);
+            this.rear=rear.getNext();
+            this.size++;
+        }else{
+            Node temp=front;
+            if(nuevo.getElement().getEnfermedad().getCodigo()=='I'){                
+                nuevo.setNext(front.getNext());
+                this.front.setNext(nuevo);
+                this.size++;
+            }
+            if(nuevo.getElement().getEnfermedad().getCodigo()=='H'){
+                temp=front;
+                while(true){
+                        if(temp.getNext()==rear){
+                            if (rear.getElement().getEnfermedad().getCodigo()=='I'){
+                                temp.getNext().setNext(nuevo);
+                                rear=rear.getNext();
+                                this.size++;
+                            }else{
+                                temp.setNext(nuevo);
+                                nuevo.setNext(rear);
+                                this.size++;
+                            }
+                            break;
+                        }else if(temp.getNext().getElement().getEnfermedad().getCodigo()=='I'){
+                            temp=temp.getNext();
+                        }
+                        else{
+                            nuevo.setNext(temp.getNext());
+                            temp.setNext(nuevo);
+                            this.size++;
+                            break;
+                        }
+                }
+            }
+            if(nuevo.getElement().getEnfermedad().getCodigo()=='P'){
+                while(true){
+                        if(temp.getNext()==rear){
+                            if (rear.getElement().getEnfermedad().getCodigo()=='I' || rear.getElement().getEnfermedad().getCodigo()=='H'){
+                                temp.getNext().setNext(nuevo);
+                                rear=rear.getNext();
+                                this.size++;
+                            }else{
+                                temp.setNext(nuevo);
+                                nuevo.setNext(rear);
+                                this.size++;
+                            }
+                            break;
+                        }else if(temp.getNext().getElement().getEnfermedad().getCodigo()=='I' || temp.getNext().getElement().getEnfermedad().getCodigo()=='H'){
+                            temp=temp.getNext();
+                        }
+                        else{
+                            nuevo.setNext(temp.getNext());
+                            temp.setNext(nuevo);
+                            this.size++;
+                            break;
+                        }
+                }
+            }
+            if(nuevo.getElement().getEnfermedad().getCodigo()=='D'){
+                temp=front;
+                while(true){
+                        if(temp.getNext()==rear){
+                            if (rear.getElement().getEnfermedad().getCodigo()=='I' || rear.getElement().getEnfermedad().getCodigo()=='H' || rear.getElement().getEnfermedad().getCodigo()=='P'){
+                                temp.getNext().setNext(nuevo);
+                                rear=rear.getNext();
+                                this.size++;
+                            }else{
+                                temp.setNext(nuevo);
+                                nuevo.setNext(rear);
+                                this.size++;
+                            }
+                            break;
+                        }else if(temp.getNext().getElement().getEnfermedad().getCodigo()=='I' || temp.getNext().getElement().getEnfermedad().getCodigo()=='H' || temp.getNext().getElement().getEnfermedad().getCodigo()=='P'){
+                            temp=temp.getNext();
+                        }
+                        else{
+                            nuevo.setNext(temp.getNext());
+                            temp.setNext(nuevo);
+                            this.size++;
+                            break;
+                        }
+                }
+            }
+            if(nuevo.getElement().getEnfermedad().getCodigo()=='Q'){
+                temp=front;
+                while(true){
+                        if(temp.getNext()==rear){
+                            if (rear.getElement().getEnfermedad().getCodigo()=='I' || rear.getElement().getEnfermedad().getCodigo()=='H' || rear.getElement().getEnfermedad().getCodigo()=='P' || rear.getElement().getEnfermedad().getCodigo()=='D'){
+                                temp.getNext().setNext(nuevo);
+                                rear=rear.getNext();
+                                this.size++;
+                            }else{
+                                temp.setNext(nuevo);
+                                nuevo.setNext(rear);
+                                this.size++;
+                            }
+                            break;
+                        }else if(temp.getNext().getElement().getEnfermedad().getCodigo()=='I' || temp.getNext().getElement().getEnfermedad().getCodigo()=='H' || temp.getNext().getElement().getEnfermedad().getCodigo()=='P' || temp.getNext().getElement().getEnfermedad().getCodigo()=='D'){
+                            temp=temp.getNext();
+                        }
+                        else{
+                            nuevo.setNext(temp.getNext());
+                            temp.setNext(nuevo);
+                            this.size++;
+                            break;
+                        }
+                }  
+            }
+            if(nuevo.getElement().getEnfermedad().getCodigo()=='O'){
+                this.rear.setNext(nuevo);
+                this.rear=this.rear.getNext();
+                this.size++;
+            }
+        }
     }
 
-    public T dequeue(){
+    public Paciente dequeue(){
         if(this.size == 0){
             System.out.println("Queue is empty");
             return null;
         }
-        T temp = this.front.getNext().getElement();
-        Node<T> nTemp = this.front.getNext();
+        Paciente temp = this.front.getNext().getElement();
+        Node nTemp = this.front.getNext();
         this.front.setNext(nTemp.getNext());
         if (this.rear == nTemp){
             this.rear = this.front;
@@ -55,39 +178,27 @@ public class LQueue<T> {
     }
 
     public void clear(){
-        this.front = new Node<>();
+        this.front = new Node();
         this.rear = this.front;
         this.size = 0;
-    }
-
-    public String toString(){
-        String result = "**LQueue**\n";
-        Node<T> tFront = this.front;
-        int tSize = this.size;
-        while(tSize != 0){
-            result+= tFront.getNext().getElement() + " ";
-            tFront = tFront.getNext();
-            tSize--;
-        }
-        return result;
     }
 
     public void rotate(){
         if (this.size == 0) {
             System.out.println("Queue is empty");
         } else {
-            Node<T> current = this.front.getNext();
-            Node<T> temp = null;
-            Node<T> newRear = null;
+            Node current = this.front.getNext();
+            Node temp = null;
+            Node newRear = null;
             while (current != null) {
                 if (current == this.front.getNext()){
-                    temp = new Node<T>(current.getElement(), null);
+                    temp = new Node(current.getElement(), null);
                     newRear = temp;
                 } else if (current == this.rear) {
-                    temp = new Node<T>(current.getElement(), temp);
+                    temp = new Node(current.getElement(), temp);
                     this.front.setNext(temp);
                 } else {
-                    temp = new Node<T>(current.getElement(), temp);
+                    temp = new Node(current.getElement(), temp);
                 }
                 current = current.getNext();
             }
@@ -99,9 +210,9 @@ public class LQueue<T> {
         if (this.size == 0) {
             System.out.println("Queue is empty");
         } else {
-            Node<T> next = this.front.getNext();
-            Node<T> afterNext = next.getNext();
-            Node<T> temp = null;
+            Node next = this.front.getNext();
+            Node afterNext = next.getNext();
+            Node temp = null;
 
             while (afterNext != null) {
                 if (next == this.front.getNext()){
@@ -117,4 +228,29 @@ public class LQueue<T> {
 
         }
     }
+
+    public Node getFront() {
+        return front;
+    }
+
+    public void setFront(Node front) {
+        this.front = front;
+    }
+
+    public Node getRear() {
+        return rear;
+    }
+
+    public void setRear(Node rear) {
+        this.rear = rear;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+    
 }

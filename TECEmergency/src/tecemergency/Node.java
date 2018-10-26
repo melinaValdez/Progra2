@@ -9,12 +9,12 @@ package tecemergency;
  *
  * @author Melina
  */
-public class Node<T> {
+public class Node {
 
     //atributos
 
-    private T element;
-    private Node<T> next;
+    private Paciente element;
+    private Node next;
 
     //Constructores
     public Node() {
@@ -22,31 +22,31 @@ public class Node<T> {
         this.next = null;
     }
 
-    public Node(T element) {
+    public Node(Paciente element) {
         this.element = element;
         this.next = null;
     }
 
-    public Node(T element, Node<T> next) {
+    public Node(Paciente element, Node next) {
         this.element = element;
         this.next = next;
     }
 
     //metodos
 
-    public T getElement() {
+    public Paciente getElement() {
         return this.element;
     }
 
-    public void setElement(T element) {
+    public void setElement(Paciente element) {
         this.element = element;
     }
 
-    public Node<T> getNext() {
+    public Node getNext() {
         return this.next;
     }
 
-    public void setNext(Node<T> next) {
+    public void setNext(Node next) {
         this.next = next;
     }
 }

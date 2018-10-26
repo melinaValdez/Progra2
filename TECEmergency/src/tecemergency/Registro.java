@@ -16,6 +16,7 @@ import static tecemergency.Colores.*;
 public class Registro extends javax.swing.JFrame {
     JPanel panel = new JPanel();
     Random aleatorio = new Random(System.currentTimeMillis());
+    LQueue cola = new LQueue();
     /**
      * Creates new form Registro
      */
@@ -159,10 +160,10 @@ public class Registro extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
-        if (txtNombre.getText().isEmpty() | txtFecha.getText().isEmpty() | txtDetalles.getText().isEmpty()){
+        /*if (txtNombre.getText().isEmpty() | txtFecha.getText().isEmpty() | txtDetalles.getText().isEmpty()){
             JOptionPane.showMessageDialog(panel, "Por favor, no deje espacios en blanco.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        else{
+        else{*/
             int bandera = aleatorio.nextInt(2);
             Colores seccion = ROJO;
             if (bandera == 0){
@@ -173,7 +174,13 @@ public class Registro extends javax.swing.JFrame {
             }
             Paciente nuevoPaciente = new Paciente(txtNombre.getText(),txtFecha.getText(), txtDetalles.getText(),seccion,Enfermedades.valueOf(cmbTipo.getSelectedItem().toString()));
             JOptionPane.showMessageDialog(panel, "Usted ha sido registrado correctamente en el sistema.\nSu ficha es: " + nuevoPaciente.getFicha(), "Registro", JOptionPane.INFORMATION_MESSAGE);
-        }
+            cola.enqueue(nuevoPaciente);
+            Node temp = cola.getFront().getNext();
+            for (int index = 0; index < cola.size(); index++){
+                System.out.println(temp.getElement().getNombre());
+                temp = temp.getNext();
+            }
+        //}
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
