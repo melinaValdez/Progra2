@@ -7,7 +7,6 @@ package tecemergency;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import java.util.concurrent.ThreadLocalRandom;
 import static tecemergency.Colores.*;
 /**
  *
@@ -140,7 +139,7 @@ public class Registro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRegistrar);
-        btnRegistrar.setBounds(260, 500, 150, 60);
+        btnRegistrar.setBounds(260, 480, 150, 60);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/257a75c1-2119-4e74-b908-cf7a24d02f58.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -175,11 +174,6 @@ public class Registro extends javax.swing.JFrame {
             Paciente nuevoPaciente = new Paciente(txtNombre.getText(),txtFecha.getText(), txtDetalles.getText(),seccion,Enfermedades.valueOf(cmbTipo.getSelectedItem().toString()));
             JOptionPane.showMessageDialog(panel, "Usted ha sido registrado correctamente en el sistema.\nSu ficha es: " + nuevoPaciente.getFicha(), "Registro", JOptionPane.INFORMATION_MESSAGE);
             cola.enqueue(nuevoPaciente);
-            Node temp = cola.getFront().getNext();
-            for (int index = 0; index < cola.size(); index++){
-                System.out.println(temp.getElement().getNombre());
-                temp = temp.getNext();
-            }
         //}
     }//GEN-LAST:event_btnRegistrarActionPerformed
 

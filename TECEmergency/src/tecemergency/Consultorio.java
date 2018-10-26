@@ -17,19 +17,17 @@ public class Consultorio {
     private Paciente paciente;
     
     public Consultorio(Colores pColor){
-        switch (pColor.getPrioridad()){
-            case 0:
+        if (pColor.getPrioridad() == 0){
                 contadorRojo++;
                 id = contadorRojo;
-                break;
-            case 1:
+        }
+        else if (pColor.getPrioridad() == 1){
                 contadorVerde++;
                 id = contadorVerde;
-                break;
-            case 2:
+        }
+        else if (pColor.getPrioridad() == 2){
                 contadorAmarillo++;
                 id = contadorAmarillo;
-                break;
         }
     }
     
