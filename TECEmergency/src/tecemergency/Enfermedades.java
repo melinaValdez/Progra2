@@ -20,8 +20,7 @@ public enum Enfermedades {
         codigo = pCodigo;
         enfermedad = pEnfermedad;
     }
-
-    public int getPrioridad() {
+    int getPrioridad() {
         return prioridad;
     }
 

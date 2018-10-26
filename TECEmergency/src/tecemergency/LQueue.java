@@ -94,7 +94,7 @@ public class LQueue<T> {
             this.rear = newRear;
         }
     }
-
+    
     public void rotate2(){
         if (this.size == 0) {
             System.out.println("Queue is empty");

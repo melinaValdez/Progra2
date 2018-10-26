@@ -4,13 +4,18 @@
  * and open the template in the editor.
  */
 package tecemergency;
-
+import java.util.Random;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import java.util.concurrent.ThreadLocalRandom;
+import static tecemergency.Colores.*;
 /**
  *
  * @author Melina
  */
 public class Registro extends javax.swing.JFrame {
-    
+    JPanel panel = new JPanel();
+    Random aleatorio = new Random(System.currentTimeMillis());
     /**
      * Creates new form Registro
      */
@@ -21,8 +26,10 @@ public class Registro extends javax.swing.JFrame {
             cmbTipo.addItem(e.getEnfermedad());
         }
         cmbSeccion.removeAllItems();
-        cmbSeccion.addItem("AMARILLO");
-        cmbSeccion.addItem("VERDE");
+        for (Colores e : Colores.values()){
+            cmbSeccion.addItem(e.getColor());
+        }
+        cmbSeccion.removeItem("ROJO");
         setSize(680,627);
     }
 
@@ -152,6 +159,21 @@ public class Registro extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
+        if (txtNombre.getText().isEmpty() | txtFecha.getText().isEmpty() | txtDetalles.getText().isEmpty()){
+            JOptionPane.showMessageDialog(panel, "Por favor, no deje espacios en blanco.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            int bandera = aleatorio.nextInt(2);
+            Colores seccion = ROJO;
+            if (bandera == 0){
+                seccion = Colores.valueOf(cmbSeccion.getSelectedItem().toString());
+            }
+            else{
+                JOptionPane.showMessageDialog(panel, "Debido a su condición, será asignado a la cola de emergencias.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+            Paciente nuevoPaciente = new Paciente(txtNombre.getText(),txtFecha.getText(), txtDetalles.getText(),seccion,Enfermedades.valueOf(cmbTipo.getSelectedItem().toString()));
+            JOptionPane.showMessageDialog(panel, "Usted ha sido registrado correctamente en el sistema.\nSu ficha es: " + nuevoPaciente.getFicha(), "Registro", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
