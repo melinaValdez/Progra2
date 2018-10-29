@@ -10,12 +10,13 @@ package tecemergency;
  * @author Melina
  */
 public class PantallaPrincipal extends javax.swing.JFrame {
-
+    boolean isQueue;
     /**
      * Creates new form PantallaPrincipal
      */
-    public PantallaPrincipal() {
+    public PantallaPrincipal(boolean pIsQueue) {
         initComponents();
+        isQueue = pIsQueue;
     }
 
     /**
@@ -79,7 +80,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new EstadoConsultorios().setVisible(true);
+        //new EstadoConsultorios().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

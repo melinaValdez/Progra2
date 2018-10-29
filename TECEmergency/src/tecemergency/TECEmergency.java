@@ -18,14 +18,6 @@ public class TECEmergency {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-    Consultorio cons1 = new Consultorio(ROJO);
-    Consultorio cons2 = new Consultorio(ROJO);
-    Consultorio cons3 = new Consultorio(VERDE);
-    LinkedList rojos = LinkedList.getConsultoriosRojos();
-    rojos.append(cons1);
-    rojos.append(cons2);
-    LinkedList verdes = LinkedList.getConsultoriosVerdes();
-    verdes.append(cons3);
-    new PantallaPrincipal().setVisible(true);
+    new Configuracion().setVisible(true);
     }
 }

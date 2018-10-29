@@ -17,8 +17,8 @@ public class LinkedList {
     private int position;
     private int size;
     private static LinkedList consVerdes;
-    private static LinkedList consAmarillos;
     private static LinkedList consRojos;
+    private static LinkedList consAmarillos;
 
     //constructores LinkedList
 
@@ -32,26 +32,27 @@ public class LinkedList {
         this.size = 0;
         this.position = -1;
     }
-    //Patron singleton para manejar una sola lista de cada color de consultorio:
-     public static LinkedList getConsultoriosVerdes() {
-       if(consVerdes == null) {
-          consVerdes = new LinkedList();
-       }
-       return consVerdes;
-    }
-    public static LinkedList getConsultoriosAmarillos() {
-       if(consAmarillos == null) {
-          consAmarillos = new LinkedList();
-       }
-       return consVerdes;
-    }
-    public static LinkedList getConsultoriosRojos() {
+    //Patron singleton
+    public static LinkedList getConsRojos() {
        if(consRojos == null) {
           consRojos = new LinkedList();
        }
        return consRojos;
     }
     
+    public static LinkedList getConsVerdes() {
+       if(consVerdes == null) {
+          consVerdes = new LinkedList();
+       }
+       return consVerdes;
+    }
+    
+    public static LinkedList getConsAmarillos() {
+       if(consAmarillos == null) {
+          consAmarillos = new LinkedList();
+       }
+       return consAmarillos;
+    }
     /**
      * Agrega un nuevo elemento a la lista
      * @param element El elemento a agregar
