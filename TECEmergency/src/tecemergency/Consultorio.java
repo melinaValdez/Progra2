@@ -23,24 +23,40 @@ public class Consultorio {
     }
 
     public Consultorio(Colores pColor){
-        if (pColor.getPrioridad() == 0){
+        switch (pColor.getPrioridad()) {
+            case 0:
                 contadorRojo++;
                 id = contadorRojo;
-        }
-        else if (pColor.getPrioridad() == 1){
+                break;
+            case 1:
                 contadorVerde++;
                 id = contadorVerde;
-        }
-        else if (pColor.getPrioridad() == 2){
+                break;
+            case 2:
                 contadorAmarillo++;
                 id = contadorAmarillo;
+                break;
+            default:
+                break;
         }
     }
 
-    public boolean atender(){
+    public boolean atender(LQueue pQueue){
+        if (pQueue.getFront().getNext() == null){
+            return false;
+        } else{
+            paciente = pQueue.dequeue();
+        }
         return false;
     }
-    public boolean liberarYAtender(){
+    public boolean liberarYAtender(LQueue pQueue){
+        if (pQueue.getFront().getNext() == null){
+            return false;
+        } else{
+            //pasar el paciente a la lista de egresos
+            paciente = pQueue.dequeue();
+        }
+        return false;
         return false;
     }
 
