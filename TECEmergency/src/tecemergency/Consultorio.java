@@ -57,7 +57,6 @@ public class Consultorio {
             paciente = pQueue.dequeue();
         }
         return false;
-        return false;
     }
 
     public int getId() {

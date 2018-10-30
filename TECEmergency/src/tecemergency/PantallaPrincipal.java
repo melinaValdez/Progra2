@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PantallaPrincipal extends javax.swing.JFrame {
     boolean isQueue;
+    QueueConsultorios colaEgresos;
     LQueue filaRoja;
     LQueue filaAmarilla;
     LQueue filaVerde;
@@ -29,6 +30,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         filaRoja = new LQueue();
         filaAmarilla = new LQueue();
         filaVerde = new LQueue();
+        colaEgresos=new QueueConsultorios();
+        
         setTable(consRojos, tblRojos);
         setTable(consVerdes, tblVerdes);
         setTable(consAmarillos, tblAmarillos);
@@ -50,9 +53,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         tblRojos = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblVerdes = new javax.swing.JTable();
+        btnEgresos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
 
         btnRegistro.setFont(new java.awt.Font("Perpetua Titling MT", 1, 14)); // NOI18N
         btnRegistro.setText("REGISTRO");
@@ -61,8 +64,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 btnRegistroActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistro);
-        btnRegistro.setBounds(20, 480, 130, 60);
 
         jButton1.setFont(new java.awt.Font("Perpetua Titling MT", 1, 14)); // NOI18N
         jButton1.setText("estado c.");
@@ -71,8 +72,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(20, 410, 130, 58);
 
         tblAmarillos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -86,9 +85,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         ));
         jScrollPane2.setViewportView(tblAmarillos);
-
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(23, 50, 151, 150);
+        tblAmarillos.getAccessibleContext().setAccessibleDescription("");
 
         tblRojos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,9 +100,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tblRojos);
 
-        getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(551, 50, 151, 150);
-
         tblVerdes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -119,11 +113,69 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(tblVerdes);
 
-        getContentPane().add(jScrollPane4);
-        jScrollPane4.setBounds(292, 50, 151, 150);
+        btnEgresos.setFont(new java.awt.Font("Perpetua Titling MT", 1, 14)); // NOI18N
+        btnEgresos.setText("EGRESOS");
+        btnEgresos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEgresosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEgresos, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnRegistro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)))
+                .addGap(0, 94, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEgresos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new EstadoConsultorios().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
+        // TODO add your handling code here:
+        new Registro().setVisible(true);
+    }//GEN-LAST:event_btnRegistroActionPerformed
+
+    private void btnEgresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEgresosActionPerformed
+        // TODO add your handling code here:
+        Egresos egresos=new Egresos();
+        egresos.setVisible(true);
+        Egresos.labelEgresos.setText("Cantidad de puestos de atención para egresos: "+QueueConsultorios.getConsEgresos().getSize());
+    }//GEN-LAST:event_btnEgresosActionPerformed
     private void setTable(QueueConsultorios pQueue, JTable pTable){
         DefaultTableModel model = new DefaultTableModel();
         pTable.setModel(model);
@@ -134,21 +186,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             temp = temp.getNext();
         }
     }
-    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-        // TODO add your handling code here:
-        new Registro().setVisible(true);
-    }//GEN-LAST:event_btnRegistroActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        new EstadoConsultorios().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEgresos;
     private javax.swing.JButton btnRegistro;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane2;

@@ -155,6 +155,11 @@ public class Configuracion extends javax.swing.JFrame {
                     consVerdes.enqueue(consTemporal);
                 }
                 hide();
+                QueueConsultorios consEgresos =QueueConsultorios.getConsEgresos();
+                for(int index=0; index<Integer.parseInt(spEgresos.getValue().toString()); index++){
+                    Consultorio consTemporal=new Consultorio();
+                    consEgresos.enqueue(consTemporal);
+                }
                 new PantallaPrincipal(true).setVisible(true);
             }
         }

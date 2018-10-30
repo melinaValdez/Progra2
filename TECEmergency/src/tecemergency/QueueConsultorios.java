@@ -16,6 +16,7 @@ public class QueueConsultorios {
     private static QueueConsultorios consVerdes;
     private static QueueConsultorios consRojos;
     private static QueueConsultorios consAmarillos;
+    private static QueueConsultorios consEgresos;
 
     public QueueConsultorios(){
         this.front = new NodeConsultorio();
@@ -43,6 +44,13 @@ public class QueueConsultorios {
           consAmarillos = new QueueConsultorios();
        }
        return consAmarillos;
+    }
+    
+    public static QueueConsultorios getConsEgresos(){
+        if(consEgresos==null){
+            consEgresos=new QueueConsultorios();
+        }
+        return consEgresos;
     }
     
     public void enqueue(Consultorio element){
