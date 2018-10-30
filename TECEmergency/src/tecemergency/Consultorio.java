@@ -11,11 +11,17 @@ package tecemergency;
  */
 public class Consultorio {
     private int id;
-    private static int contadorVerde;
-    private static int contadorAmarillo;
-    private static int contadorRojo;
+    private static int contadorVerde=0;
+    private static int contadorAmarillo=0;
+    private static int contadorRojo=0;
+    private static int contadorEgresos=0;
     private Paciente paciente;
-    
+
+    public Consultorio(){
+        contadorEgresos++;
+        id=contadorEgresos;
+    }
+
     public Consultorio(Colores pColor){
         if (pColor.getPrioridad() == 0){
                 contadorRojo++;
@@ -30,7 +36,7 @@ public class Consultorio {
                 id = contadorAmarillo;
         }
     }
-    
+
     public boolean atender(){
         return false;
     }
@@ -53,6 +59,6 @@ public class Consultorio {
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
-    
-    
+
+
 }

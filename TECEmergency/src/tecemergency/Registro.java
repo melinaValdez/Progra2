@@ -123,6 +123,11 @@ public class Registro extends javax.swing.JFrame {
 
         cmbTipo.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipoActionPerformed(evt);
+            }
+        });
         getContentPane().add(cmbTipo);
         cmbTipo.setBounds(280, 250, 160, 40);
 
@@ -176,6 +181,10 @@ public class Registro extends javax.swing.JFrame {
             cola.enqueue(nuevoPaciente);
         //}
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void cmbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTipoActionPerformed
 
     /**
      * @param args the command line arguments

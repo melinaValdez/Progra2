@@ -14,7 +14,7 @@ public enum Colores{
     private final int prioridad;
     private final char codigo;
     private final String color;
-    
+
     Colores(int pPrioridad, char pInicial, String pColor){
         prioridad = pPrioridad;
         codigo = pInicial;
@@ -32,5 +32,5 @@ public enum Colores{
     public String getColor() {
         return color;
     }
-    
+
 }

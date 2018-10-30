@@ -5,8 +5,11 @@
  */
 package tecemergency;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UnsupportedLookAndFeelException;
 import static tecemergency.Colores.*;
 
 /**
@@ -23,7 +26,7 @@ public class Configuracion extends javax.swing.JFrame {
         cmbEstructura.removeAllItems();
         cmbEstructura.addItem("COLA");
         cmbEstructura.addItem("HEAP");
-        setSize(536,540);
+        setSize(536,570);
     }
 
     /**
@@ -132,26 +135,30 @@ public class Configuracion extends javax.swing.JFrame {
         }
         else{
             if (cmbEstructura.getSelectedItem().equals("COLA")){
-                LinkedList consRojos = LinkedList.getConsRojos();
+                QueueConsultorios consRojos = QueueConsultorios.getConsRojos();
+                consRojos.clear();
                 //Heap = null;
-                for (int index = 0; index < consRojos.getPosition(); index++){
+                for (int index = 0; index < Integer.parseInt(spRojos.getValue().toString()); index++){
                     Consultorio consTemporal = new Consultorio(ROJO);
-                    consRojos.insert(consTemporal);
+                    consRojos.enqueue(consTemporal);
                 }
-                LinkedList consAmarillos = LinkedList.getConsAmarillos();
-                for (int index = 0; index < consAmarillos.getPosition(); index++){
+                QueueConsultorios consAmarillos = QueueConsultorios.getConsAmarillos();
+                consAmarillos.clear();
+                for (int index = 0; index < Integer.parseInt(spAmarillos.getValue().toString()); index++){
                     Consultorio consTemporal = new Consultorio(AMARILLO);
-                    consAmarillos.insert(consTemporal);
+                    consAmarillos.enqueue(consTemporal);
                 }
-                LinkedList consVerdes = LinkedList.getConsVerdes();
-                for (int index = 0; index < consVerdes.getPosition(); index++){
+                QueueConsultorios consVerdes = QueueConsultorios.getConsVerdes();
+                consVerdes.clear();
+                for (int index = 0; index < Integer.parseInt(spVerdes.getValue().toString()); index++){
                     Consultorio consTemporal = new Consultorio(VERDE);
-                    consVerdes.insert(consTemporal);
+                    consVerdes.enqueue(consTemporal);
                 }
+                hide();
                 new PantallaPrincipal(true).setVisible(true);
             }
         }
-    }//GEN-LAST:event_btnAceptarActionPerformed
+    }                                          
 
     /**
      * @param args the command line arguments
@@ -160,7 +167,7 @@ public class Configuracion extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -168,25 +175,19 @@ public class Configuracion extends javax.swing.JFrame {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
+                new PantallaPrincipal(true).setVisible(true);
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Configuracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Configuracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Configuracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Configuracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Configuracion().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
