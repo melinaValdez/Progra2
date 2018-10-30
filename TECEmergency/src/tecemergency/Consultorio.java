@@ -11,9 +11,9 @@ package tecemergency;
  */
 public class Consultorio {
     private int id;
-    private static int contadorVerde;
-    private static int contadorAmarillo;
-    private static int contadorRojo;
+    private static int contadorVerde = 0;
+    private static int contadorAmarillo = 0;
+    private static int contadorRojo = 0;
     private Paciente paciente;
     
     public Consultorio(Colores pColor){

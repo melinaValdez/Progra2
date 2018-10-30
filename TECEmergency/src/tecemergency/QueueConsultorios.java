@@ -13,20 +13,45 @@ public class QueueConsultorios {
     private NodeConsultorio front;
     private NodeConsultorio rear;
     private int size;
+    private static QueueConsultorios consVerdes;
+    private static QueueConsultorios consRojos;
+    private static QueueConsultorios consAmarillos;
 
     public QueueConsultorios(){
         this.front = new NodeConsultorio();
         this.rear = this.front;
         this.size = 0;
     }
-
+    
+    //Patron singleton
+    public static QueueConsultorios getConsRojos() {
+       if(consRojos == null) {
+          consRojos = new QueueConsultorios();
+       }
+       return consRojos;
+    }
+    
+    public static QueueConsultorios getConsVerdes() {
+       if(consVerdes == null) {
+          consVerdes = new QueueConsultorios();
+       }
+       return consVerdes;
+    }
+    
+    public static QueueConsultorios getConsAmarillos() {
+       if(consAmarillos == null) {
+          consAmarillos = new QueueConsultorios();
+       }
+       return consAmarillos;
+    }
+    
     public void enqueue(Consultorio element){
         this.rear.setNext(new NodeConsultorio(element, null));
         this.rear = rear.getNext();
         this.size++;
     }
 
-    public T dequeue(){
+    public Consultorio dequeue(){
         if(this.size == 0){
             System.out.println("Queue is empty");
             return null;
@@ -116,3 +141,29 @@ public class QueueConsultorios {
 
         }
     }
+
+    public NodeConsultorio getFront() {
+        return front;
+    }
+
+    public void setFront(NodeConsultorio front) {
+        this.front = front;
+    }
+
+    public NodeConsultorio getRear() {
+        return rear;
+    }
+
+    public void setRear(NodeConsultorio rear) {
+        this.rear = rear;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+    
+}

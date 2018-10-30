@@ -12,14 +12,14 @@ import javax.swing.table.DefaultTableModel;
  * @author Melina
  */
 public class EstadoConsultorios extends javax.swing.JFrame {
-    LinkedList consVerdes = LinkedList.getConsVerdes();
-    LinkedList consAmarillos = LinkedList.getConsAmarillos();
-    LinkedList consRojos = LinkedList.getConsRojos();
+    QueueConsultorios consVerdes = QueueConsultorios.getConsVerdes();
+    QueueConsultorios consAmarillos = QueueConsultorios.getConsAmarillos();
+    QueueConsultorios consRojos = QueueConsultorios.getConsRojos();
     JPanel panel = new JPanel();
     /**
      * Creates new form EstadoConsultorios
      */
-    public EstadoConsultorios(Configuracion conf) {
+    public EstadoConsultorios() {
         initComponents();
         setTable();
         setSize(595,590);
@@ -85,7 +85,7 @@ public class EstadoConsultorios extends javax.swing.JFrame {
             model.addColumn("ID");
             model.addColumn("Estado");
             model.addColumn("Paciente");
-            NodeConsultorio temp = consVerdes.getHead().getNext();
+            NodeConsultorio temp = consVerdes.getFront().getNext();
             for (int index = 0; index < consVerdes.getSize(); index++){
                 if (temp.getElement().getPaciente() == null)
                     model.addRow(new Object[]{"Verde",temp.getElement().getId(),"Libre","-"});
@@ -93,7 +93,7 @@ public class EstadoConsultorios extends javax.swing.JFrame {
                     model.addRow(new Object[]{"Verde",temp.getElement().getId(),"Ocupado",temp.getElement().getPaciente().getFicha()});
             }
             if (consAmarillos.getSize() != 0){
-                temp = consAmarillos.getHead().getNext();
+                temp = consAmarillos.getFront().getNext();
                 for (int index = 0; index < consAmarillos.getSize(); index++){
                     if (temp.getElement().getPaciente() == null)
                         model.addRow(new Object[]{"Amarillo",temp.getElement().getId(),"Libre","-"});
@@ -101,7 +101,7 @@ public class EstadoConsultorios extends javax.swing.JFrame {
                         model.addRow(new Object[]{"Amarillo",temp.getElement().getId(),"Ocupado",temp.getElement().getPaciente().getFicha()});
                 }
             }
-            temp = consRojos.getHead().getNext();
+            temp = consRojos.getFront().getNext();
             for (int index = 0; index < consRojos.getSize(); index++){
                 if (temp.getElement().getPaciente() == null)
                     model.addRow(new Object[]{"Rojo",temp.getElement().getId(),"Libre","-"});

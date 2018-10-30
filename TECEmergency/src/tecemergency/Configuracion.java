@@ -23,7 +23,7 @@ public class Configuracion extends javax.swing.JFrame {
         cmbEstructura.removeAllItems();
         cmbEstructura.addItem("COLA");
         cmbEstructura.addItem("HEAP");
-        setSize(536,540);
+        setSize(536,570);
     }
 
     /**
@@ -132,22 +132,26 @@ public class Configuracion extends javax.swing.JFrame {
         }
         else{
             if (cmbEstructura.getSelectedItem().equals("COLA")){
-                LinkedList consRojos = LinkedList.getConsRojos();
+                QueueConsultorios consRojos = QueueConsultorios.getConsRojos();
+                consRojos.clear();
                 //Heap = null;
-                for (int index = 0; index < consRojos.getPosition(); index++){
+                for (int index = 0; index < Integer.parseInt(spRojos.getValue().toString()); index++){
                     Consultorio consTemporal = new Consultorio(ROJO);
-                    consRojos.insert(consTemporal);
+                    consRojos.enqueue(consTemporal);
                 }
-                LinkedList consAmarillos = LinkedList.getConsAmarillos();
-                for (int index = 0; index < consAmarillos.getPosition(); index++){
+                QueueConsultorios consAmarillos = QueueConsultorios.getConsAmarillos();
+                consAmarillos.clear();
+                for (int index = 0; index < Integer.parseInt(spAmarillos.getValue().toString()); index++){
                     Consultorio consTemporal = new Consultorio(AMARILLO);
-                    consAmarillos.insert(consTemporal);
+                    consAmarillos.enqueue(consTemporal);
                 }
-                LinkedList consVerdes = LinkedList.getConsVerdes();
-                for (int index = 0; index < consVerdes.getPosition(); index++){
+                QueueConsultorios consVerdes = QueueConsultorios.getConsVerdes();
+                consVerdes.clear();
+                for (int index = 0; index < Integer.parseInt(spVerdes.getValue().toString()); index++){
                     Consultorio consTemporal = new Consultorio(VERDE);
-                    consVerdes.insert(consTemporal);
+                    consVerdes.enqueue(consTemporal);
                 }
+                hide();
                 new PantallaPrincipal(true).setVisible(true);
             }
         }
