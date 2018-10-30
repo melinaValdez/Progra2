@@ -15,7 +15,7 @@ import static tecemergency.Colores.*;
 public class Registro extends javax.swing.JFrame {
     JPanel panel = new JPanel();
     Random aleatorio = new Random(System.currentTimeMillis());
-    LQueue cola = new LQueue();
+    //LQueue cola = new LQueue();
     /**
      * Creates new form Registro
      */
@@ -178,7 +178,19 @@ public class Registro extends javax.swing.JFrame {
             }
             Paciente nuevoPaciente = new Paciente(txtNombre.getText(),txtFecha.getText(), txtDetalles.getText(),seccion,Enfermedades.valueOf(cmbTipo.getSelectedItem().toString()));
             JOptionPane.showMessageDialog(panel, "Usted ha sido registrado correctamente en el sistema.\nSu ficha es: " + nuevoPaciente.getFicha(), "Registro", JOptionPane.INFORMATION_MESSAGE);
-            cola.enqueue(nuevoPaciente);
+            if(seccion==ROJO){
+                LQueue cola=LQueue.getRojos();
+                cola.enqueue(nuevoPaciente);
+            }else if(seccion==AMARILLO){
+                LQueue cola=LQueue.getAmarillos();
+                cola.enqueue(nuevoPaciente);
+            }else{
+                LQueue cola=LQueue.getVerdes();
+                cola.enqueue(nuevoPaciente);
+            }
+            
+            
+            
         //}
     }//GEN-LAST:event_btnRegistrarActionPerformed
 

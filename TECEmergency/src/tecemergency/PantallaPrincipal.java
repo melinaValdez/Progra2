@@ -5,6 +5,8 @@
  */
 package tecemergency;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,10 +16,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PantallaPrincipal extends javax.swing.JFrame {
     boolean isQueue;
-    QueueConsultorios colaEgresos;
-    LQueue filaRoja;
-    LQueue filaAmarilla;
-    LQueue filaVerde;
+    QueueConsultorios colaEgresos=QueueConsultorios.getConsEgresos();
+    LQueue filaEgresos=LQueue.getEgresos();
+    LQueue filaRoja= LQueue.getRojos();
+    LQueue filaAmarilla= LQueue.getAmarillos();
+    LQueue filaVerde=LQueue.getVerdes();
     QueueConsultorios consRojos = QueueConsultorios.getConsRojos();
     QueueConsultorios consVerdes = QueueConsultorios.getConsVerdes();
     QueueConsultorios consAmarillos = QueueConsultorios.getConsAmarillos();
@@ -27,14 +30,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     public PantallaPrincipal(boolean pIsQueue) {
         initComponents();
         isQueue = pIsQueue;
-        filaRoja = new LQueue();
-        filaAmarilla = new LQueue();
-        filaVerde = new LQueue();
-        colaEgresos=new QueueConsultorios();
+//        filaRoja = new LQueue();
+//        filaAmarilla = new LQueue();
+//        filaVerde = new LQueue();
+//        colaEgresos=new QueueConsultorios();
         
         setTable(consRojos, tblRojos);
         setTable(consVerdes, tblVerdes);
         setTable(consAmarillos, tblAmarillos);
+        setTable(colaEgresos, tblEgresos);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,6 +58,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         tblVerdes = new javax.swing.JTable();
         btnEgresos = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblEgresos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,7 +87,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 {null}
             },
             new String [] {
-                "Consultorios disponibles"
+                "Consultorios amarillos disponibles"
             }
         ));
         jScrollPane2.setViewportView(tblAmarillos);
@@ -95,7 +101,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 {null}
             },
             new String [] {
-                "Consultorios disponibles"
+                "Consultorios rojos disponibles"
             }
         ));
         jScrollPane3.setViewportView(tblRojos);
@@ -108,7 +114,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 {null}
             },
             new String [] {
-                "Consultorios disponibles"
+                "Consultorios verdes disponibles"
             }
         ));
         jScrollPane4.setViewportView(tblVerdes);
@@ -121,6 +127,19 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        tblEgresos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Puestos de egresos"
+            }
+        ));
+        jScrollPane5.setViewportView(tblEgresos);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,32 +147,37 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEgresos, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(btnRegistro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)))
-                .addGap(0, 94, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEgresos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEgresos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(62, 62, 62))
         );
 
@@ -172,9 +196,28 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
     private void btnEgresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEgresosActionPerformed
         // TODO add your handling code here:
-        Egresos egresos=new Egresos();
-        egresos.setVisible(true);
-        Egresos.labelEgresos.setText("Cantidad de puestos de atención para egresos: "+QueueConsultorios.getConsEgresos().getSize());
+        if(filaEgresos.getSize()!=0){
+            Egresos egresos=new Egresos();
+            egresos.setVisible(true);
+            Egresos.labelEgresos.setText("Cantidad de puestos de atención para egresos: "+QueueConsultorios.getConsEgresos().getSize());
+            Node temp=filaEgresos.getFront().getNext();
+            Egresos.labelPaciente.setText("Nombre: "+temp.getElement().getNombre()+" Ficha: "+temp.getElement().getFicha());
+
+            NodeConsultorio temp2=colaEgresos.getFront().getNext();
+            Egresos.comboEgresos.removeAllItems();
+            while(temp2!=null){
+                String x=String.valueOf(temp2.getElement().getId());
+                Egresos.comboEgresos.addItem(x);
+                temp2=temp2.getNext();
+            }
+        }else{
+            JPanel panel=new JPanel();
+            JOptionPane.showMessageDialog(panel, "La lista de egresos está vacía.","Error",JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+
+        
+        
     }//GEN-LAST:event_btnEgresosActionPerformed
     private void setTable(QueueConsultorios pQueue, JTable pTable){
         DefaultTableModel model = new DefaultTableModel();
@@ -197,7 +240,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable tblAmarillos;
+    private javax.swing.JTable tblEgresos;
     private javax.swing.JTable tblRojos;
     private javax.swing.JTable tblVerdes;
     // End of variables declaration//GEN-END:variables

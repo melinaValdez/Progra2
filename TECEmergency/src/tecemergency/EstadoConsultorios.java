@@ -15,6 +15,10 @@ public class EstadoConsultorios extends javax.swing.JFrame {
     QueueConsultorios consVerdes = QueueConsultorios.getConsVerdes();
     QueueConsultorios consAmarillos = QueueConsultorios.getConsAmarillos();
     QueueConsultorios consRojos = QueueConsultorios.getConsRojos();
+    LQueue egresos=LQueue.getEgresos();
+    LQueue roja=LQueue.getRojos();
+    LQueue amarilla=LQueue.getAmarillos();
+    LQueue verde=LQueue.getVerdes();
     JPanel panel = new JPanel();
     /**
      * Creates new form EstadoConsultorios
@@ -35,15 +39,23 @@ public class EstadoConsultorios extends javax.swing.JFrame {
     private void initComponents() {
 
         lblRegistro = new javax.swing.JLabel();
+        lblBackground = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblConsultorios = new javax.swing.JTable();
-        lblBackground = new javax.swing.JLabel();
+        tblPacientes1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblPacientes = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         lblRegistro.setFont(new java.awt.Font("Perpetua Titling MT", 1, 22)); // NOI18N
         lblRegistro.setForeground(new java.awt.Color(51, 51, 51));
         lblRegistro.setText("REGISTRO DEL PACIENTE");
 
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/257a75c1-2119-4e74-b908-cf7a24d02f58.jpg"))); // NOI18N
+
+        setMinimumSize(new java.awt.Dimension(1200, 1000));
         getContentPane().setLayout(null);
 
         lblTitulo.setFont(new java.awt.Font("Perpetua Titling MT", 1, 22)); // NOI18N
@@ -51,8 +63,33 @@ public class EstadoConsultorios extends javax.swing.JFrame {
         getContentPane().add(lblTitulo);
         lblTitulo.setBounds(100, 10, 380, 80);
 
-        tblConsultorios.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
-        tblConsultorios.setModel(new javax.swing.table.DefaultTableModel(
+        tblPacientes1.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        tblPacientes1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nombre", "Ficha"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblPacientes1);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(570, 90, 340, 450);
+
+        tblPacientes.setFont(new java.awt.Font("Perpetua Titling MT", 0, 14)); // NOI18N
+        tblPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -63,24 +100,80 @@ public class EstadoConsultorios extends javax.swing.JFrame {
                 "Color", "ID", "Estado", "Paciente"
             }
         ));
-        jScrollPane1.setViewportView(tblConsultorios);
+        jScrollPane2.setViewportView(tblPacientes);
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(30, 90, 520, 450);
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(30, 90, 520, 450);
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/257a75c1-2119-4e74-b908-cf7a24d02f58.jpg"))); // NOI18N
-        getContentPane().add(lblBackground);
-        lblBackground.setBounds(-110, 0, 760, 640);
+        jButton1.setText("Atender cola verde");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(650, 570, 220, 60);
+
+        jButton2.setText("Atender cola roja");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(150, 570, 220, 60);
+
+        jButton3.setText("Atender cola amarilla");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(400, 570, 220, 60);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if(verde.getSize()!=0){
+            Paciente temp=verde.dequeue();
+            egresos.enqueueEgresos(temp);
+        }
+        else{
+            JOptionPane.showMessageDialog(panel, "Cola verde esta vacia.", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if(verde.getSize()!=0){
+            Paciente temp=roja.dequeue();
+            egresos.enqueueEgresos(temp);
+        }
+        else{
+            JOptionPane.showMessageDialog(panel, "Cola roja esta vacia.", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if(verde.getSize()!=0){
+            Paciente temp=amarilla.dequeue();
+            egresos.enqueueEgresos(temp);
+        }
+        else{
+            JOptionPane.showMessageDialog(panel, "Cola amarilla esta vacia.", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
     private void setTable(){
         if (consVerdes == null && consRojos == null && consAmarillos == null){
             JOptionPane.showMessageDialog(panel, "No hay consultorios disponibles en este momento.", "Aviso", JOptionPane.ERROR_MESSAGE);
             hide();
         } else{
             DefaultTableModel model = new DefaultTableModel();
-            tblConsultorios.setModel(model);
+            tblPacientes.setModel(model);
             model.addColumn("Color");
             model.addColumn("ID");
             model.addColumn("Estado");
@@ -112,16 +205,48 @@ public class EstadoConsultorios extends javax.swing.JFrame {
                 temp = temp.getNext();
             }
         }
+        Node tempR=roja.getFront().getNext();
+        Node tempA=amarilla.getFront().getNext();
+        Node tempV=verde.getFront().getNext();
+        DefaultTableModel model2=new DefaultTableModel();
+        tblPacientes1.setModel(model2);
+        model2.addColumn("Nombre");
+        model2.addColumn("Ficha");
+        while(tempR!=null){
+            String nombre=tempR.getElement().getNombre();
+            String ficha=tempR.getElement().getFicha();
+            model2.addRow(new Object[]{nombre,ficha});
+            tempR=tempR.getNext();
+        }
+        while(tempV!=null){
+            String nombre=tempV.getElement().getNombre();
+            String ficha=tempV.getElement().getFicha();
+            model2.addRow(new Object[]{nombre,ficha});
+            tempV=tempV.getNext();
+        }
+        while(tempA!=null){
+            String nombre=tempA.getElement().getNombre();
+            String ficha=tempA.getElement().getFicha();
+            model2.addRow(new Object[]{nombre,ficha});
+            tempA=tempA.getNext();
+        }
+        
+        
     }
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblRegistro;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTable tblConsultorios;
+    private javax.swing.JTable tblPacientes;
+    private javax.swing.JTable tblPacientes1;
     // End of variables declaration//GEN-END:variables
 }
