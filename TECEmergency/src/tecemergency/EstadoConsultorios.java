@@ -91,6 +91,7 @@ public class EstadoConsultorios extends javax.swing.JFrame {
                     model.addRow(new Object[]{"Verde",temp.getElement().getId(),"Libre","-"});
                 else
                     model.addRow(new Object[]{"Verde",temp.getElement().getId(),"Ocupado",temp.getElement().getPaciente().getFicha()});
+                temp = temp.getNext();
             }
             if (consAmarillos.getSize() != 0){
                 temp = consAmarillos.getFront().getNext();
@@ -99,6 +100,7 @@ public class EstadoConsultorios extends javax.swing.JFrame {
                         model.addRow(new Object[]{"Amarillo",temp.getElement().getId(),"Libre","-"});
                     else
                         model.addRow(new Object[]{"Amarillo",temp.getElement().getId(),"Ocupado",temp.getElement().getPaciente().getFicha()});
+                    temp = temp.getNext();
                 }
             }
             temp = consRojos.getFront().getNext();
@@ -107,6 +109,7 @@ public class EstadoConsultorios extends javax.swing.JFrame {
                     model.addRow(new Object[]{"Rojo",temp.getElement().getId(),"Libre","-"});
                 else
                     model.addRow(new Object[]{"Rojo",temp.getElement().getId(),"Ocupado",temp.getElement().getPaciente().getFicha()});
+                temp = temp.getNext();
             }
         }
     }

@@ -14,12 +14,34 @@ public class LQueue {
     private Node front;
     private Node rear;
     private int size;
+   /* private static LQueue filaRoja;
+    private static LQueue filaVerde;
+    private static LQueue filaAmarilla;*/
 
     public LQueue() {
         this.front = new Node();
         this.rear = this.front;
         this.size = 0;
     }
+    //Patron singleton
+   /* public static LQueue getRojos() {
+       if(filaRoja == null) {
+          filaRoja = new LQueue();
+       }
+       return filaRoja;
+    }
+    public static LQueue getVerdes() {
+       if(filaVerde == null) {
+          filaVerde = new LQueue();
+       }
+       return filaVerde;
+    }
+    public static LQueue getAmarillos(){
+        if(filaAmarilla == null) {
+          filaAmarilla = new LQueue();
+       }
+       return filaAmarilla;
+    }*/
 
     /*Encola paciente segun el padecimiento que tenga.
     Orden de prioridad:
